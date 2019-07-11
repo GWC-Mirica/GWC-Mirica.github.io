@@ -19,14 +19,14 @@
 	}
 	div {
     font-family: myFirstFont2;
-	}  
+	}
 	body {
       font-family: "Basic Title Font";
 	  font-size:20px;
       line-height: 2.8;
       color: #000000;
   }
-  
+
   br{background-color:#000066;}
   h2 {
 	 font-family: "Basic Title Font";
@@ -233,9 +233,9 @@
     <h2 class="w3-wide">Coding Queens inc</h2>
 	  <img src="us.jpg" class="img-thumbnail" style="width: 600px; height: 375px" alt="Logo">
     <p class="w3-opacity"><i>From Girls Who Code!</i></p>
-    <p class="w3-justify"> Hello World! Coding Queens would like to introduce you to our first ever website and it's lovely founders! Coding Queens was launched 
-in the summer of 2016 by a group of high schools students. Mirica Yancey, Isabel Maymir, Gretchen Farmer, and Ahnia Ricks developed it to help propel aspiring college students and current college students through life successfully! Everyone here at Coding Queens recognizes the need to make searching for college and surving in college more efficient</br> Mirica Yancey is 17 year olds and senior at Waubonsie Valley High School, where she bowls on the varsity team. Isabel is 16 years old and junior at 
-Wayzata High School. She loves the TV show SuperNatural, drums, and tackling new coding problems! Gretchen is 
+    <p class="w3-justify"> Hello World! Coding Queens would like to introduce you to our first ever website and it's lovely founders! Coding Queens was launched
+in the summer of 2016 by a group of high schools students. Mirica Yancey, Isabel Maymir, Gretchen Farmer, and Ahnia Ricks developed it to help propel aspiring college students and current college students through life successfully! Everyone here at Coding Queens recognizes the need to make searching for college and surving in college more efficient</br> Mirica Yancey is 17 year olds and senior at Waubonsie Valley High School, where she bowls on the varsity team. Isabel is 16 years old and junior at
+Wayzata High School. She loves the TV show SuperNatural, drums, and tackling new coding problems! Gretchen is
 16 years old and a junior at Waubonsie Valley High School. She loves soccer and is looking to be an engineer in her future. And, last but not least Ahnia is 17 years old and a senior at Hillcrest High School. She loves doing volunteer services and golfing.
 Ahnia is looking at furthering her education at Bradley University. </p>
   <!-- The Contact Section -->
@@ -261,7 +261,7 @@ Ahnia is looking at furthering her education at Bradley University. </p>
       </div>
     </div>
   </div>
-  
+
 <!-- End Page Content -->
 </div>
 
@@ -270,7 +270,7 @@ Ahnia is looking at furthering her education at Bradley University. </p>
 <script src="http://maps.googleapis.com/maps/api/js"></script>
 <script>
 var myCenter = new google.maps.LatLng(41.878114, -87.629798);
-    
+
 function initialize() {
 var mapProp = {
 center:myCenter,
@@ -279,16 +279,16 @@ scrollwheel:false,
 draggable:false,
 mapTypeId:google.maps.MapTypeId.ROADMAP
 };
-    
+
 var map = new google.maps.Map(document.getElementById("googleMap"),mapProp);
-    
+
 var marker = new google.maps.Marker({
 position:myCenter,
 });
-    
+
 marker.setMap(map);
 }
-    
+
 google.maps.event.addDomListener(window, 'load', initialize);
 </script>
 
@@ -319,13 +319,13 @@ $(document).ready(function(){
       $('html, body').animate({
         scrollTop: $(hash).offset().top
       }, 900, function(){
-   
+
         // Add hash (#) to URL when done scrolling (default click behavior)
         window.location.hash = hash;
       });
     } // End if
   });
-  
+
   $(window).scroll(function() {
     $(".slideanim").each(function(){
       var pos = $(this).offset().top;
