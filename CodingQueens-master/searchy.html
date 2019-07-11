@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>College Finder</title>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="http://www.google.com/jsapi"></script>
+<script type="text/javascript"> 
+    google.load('visualization', '1',
+                {'packages':['corechart', 'table']}
+                ); 
+</script>
+<script type="text/javascript">
+	function search_col(){
+		var search_text= document.getElementById("college").value;
+	
+		function runQuery(){
+			var query = new google.visualization.Query('https://docs.google.com/spreadsheets/d/16gslxlvgashLqKeRyrJaowasgv3CIAbSgLK5Q1TSHVQ/edit#gid=0');
+			 query.setQuery("select A, B, C, D, E, F, G, H, I, J where LOWER(A) contains LOWER('"+ search_text + "')");
+			 var data_string =  query.send(handleQueryResponse);
+		};
+		// A callback function that runs when data source responds
+		// Take an object of type QueryResponse
+		function handleQueryResponse(response){
+			if (response.isError()) {
+				alert(response);
+				window.alert("Error accessing the database.")
+			}
+			else {                   
+				data = response.getDataTable().toJSON();
+				var search_college_search = document.getElementById("search_college_search");
+				var obj = JSON.parse(data);
+				if (obj.rows.length ==0) { //because google api does not seem to throwing errors as expected :/
+					search_college_search.innerHTML = "No matches found.";
+				}
+				else {
+						search_college_search.innerHTML = "";
+						var table = document.createElement('table');
+						table.setAttribute('border',null);
+						table.setAttribute('width','70%');
+						for(var i=0; i<obj.rows.length; i++)
+						{
+							var row = table.insertRow(i);
+							var a = document.createElement('a');
+							var text = document.createTextNode(obj.rows[i].c[0].v);
+							var cell = row.insertCell(0);
+									
+							a.appendChild(text);
+							a.href = obj.rows[i].c[9].v;
+							cell.setAttribute('align','center')
+							cell.appendChild(a);
+							
+						a.appendChild(text);
+							a.href = obj.rows[i].c[9].v;
+							cell.setAttribute('align','center')
+							cell.appendChild(a);
+						
+							text = document.createTextNode(obj.rows[i].c[7].v);
+							cell = row.insertCell(1);
+							cell.setAttribute('align','center')
+							cell.appendChild(text);
+							
+							text = document.createTextNode(obj.rows[i].c[2].v);
+							cell = row.insertCell(1);
+							cell.setAttribute('align','center')
+							cell.appendChild(text);
+							
+							text = document.createTextNode(obj.rows[i].c[3].v);
+							cell = row.insertCell(1);
+							cell.setAttribute('align','center')
+							cell.appendChild(text);
+							text = document.createTextNode(obj.rows[i].c[4].v);
+							cell = row.insertCell(1);
+							cell.setAttribute('align','center')
+							cell.appendChild(text);
+						}
+						search_college_search.appendChild(table);
+				};
+			};
+		}
+		runQuery();
+	}            
+</script>
+<script type="text/javascript"> 
+    google.load('visualization', '1',
+                {'packages':['corechart', 'table']}
+                ); 
+</script>
+<script type="text/javascript">
+	function search(){
+		var search_text= document.getElementById("state").value;
+	
+		function runQuery(){
+			var query = new google.visualization.Query('https://docs.google.com/spreadsheets/d/16gslxlvgashLqKeRyrJaowasgv3CIAbSgLK5Q1TSHVQ/edit#gid=0');
+			 query.setQuery("select A, B, C, D, E, F, G, H, I, J where LOWER(E) contains LOWER('"+ search_text + "')");
+			 var data_string =  query.send(handleQueryResponse);
+		};
+		// A callback function that runs when data source responds
+		// Take an object of type QueryResponse
+		function handleQueryResponse(response){
+			if (response.isError()) {
+				alert(response);
+				window.alert("Error accessing the database.")
+			}
+			else {                   
+				data = response.getDataTable().toJSON();
+				var college_search = document.getElementById("college_search");
+				var obj = JSON.parse(data);
+				if (obj.rows.length ==0) { //because google api does not seem to throwing errors as expected :/
+					college_search.innerHTML = "No matches found.";
+				}
+				else {
+						college_search.innerHTML = "";
+						var table = document.createElement('table');
+						table.setAttribute('border',null);
+						table.setAttribute('width','70%');
+						for(var i=0; i<obj.rows.length; i++)
+						{
+							var row = table.insertRow(i);
+							var a = document.createElement('a');
+							var text = document.createTextNode(obj.rows[i].c[0].v);
+							var cell = row.insertCell(0);
+									
+							a.appendChild(text);
+							a.href = obj.rows[i].c[9].v;
+							cell.setAttribute('align','center')
+							cell.appendChild(a);
+						
+							text = document.createTextNode(obj.rows[i].c[4].v);
+							cell = row.insertCell(1);
+							cell.setAttribute('align','center')
+							cell.appendChild(text);
+							
+							text = document.createTextNode(obj.rows[i].c[7].v);
+							cell = row.insertCell(1);
+							cell.setAttribute('align','center')
+							cell.appendChild(text);
+							
+							text = document.createTextNode(obj.rows[i].c[2].v);
+							cell = row.insertCell(1);
+							cell.setAttribute('align','center')
+							cell.appendChild(text);
+							
+							text = document.createTextNode(obj.rows[i].c[3].v);
+							cell = row.insertCell(1);
+							cell.setAttribute('align','center')
+							cell.appendChild(text);
+						}
+						college_search.appendChild(table);
+				};
+			};
+		}
+		runQuery();
+	}    
+</script>
+ <style>
+  @font-face {
+    font-family: myFirstFont2;
+    src: url(basic_title_font.woff);
+	}
+	div {
+    font-family: myFirstFont2;
+	}  
+	body {
+      font-family: "Code Bold";
+	  font-size:20px;
+      line-height: 2.8;
+      color: #000000;
+  }
+ 
+ .container-fluid {
+      padding: 60px 50px;
+  }
+  .jumbotron {
+      background-color: #fff;
+      color: #44F72D;
+      padding: 100px 15px;
+      font-family: "Code Bold";
+  }
+  @font-face {
+    font-family: myFirstFont;
+    src: url(code-bold.woff);
+	}
+	div {
+    font-family: myFirstFont;
+	}
+  }
+ /*this is the nav bar color*/
+ .panel { 
+      border: 1px solid #000000;
+      border-radius:0 !important;
+      transition: box-shadow 0.5s;
+  }
+  .navbar {
+      margin-bottom: 0;
+      background-color: #2f2f2f;
+      z-index: 9999;
+      border: 0;
+      font-size: 12px !important;
+      line-height: 1.42857143 !important;
+      letter-spacing: 4px;
+      border-radius: 0;
+      font-family: Montserrat, sans-serif;
+  }
+  .navbar li a, .navbar .navbar-brand {
+      color: #fff !important;
+  }
+  .navbar-nav li a:hover, .navbar-nav li.active a {
+      color: #fff !important;
+      background-color: #2f2f2f !important;
+  }
+  .navbar-default .navbar-toggle {
+      border-color: transparent;
+      color: #2f2f2f !important;
+  }
+
+/* Add Zoom Animation */
+.animate {
+    -webkit-animation: animatezoom 0.6s;
+    animation: animatezoom 0.6s
+}
+
+@-webkit-keyframes animatezoom {
+    from {-webkit-transform: scale(0)}
+    to {-webkit-transform: scale(1)}
+}
+    
+@keyframes animatezoom {
+    from {transform: scale(0)}
+    to {transform: scale(1)}
+}
+
+/* Change styles for span and cancel button on extra small screens */
+@media screen and (max-width: 300px) {
+    span.psw {
+       display: block;
+       float: none;
+    }
+  }
+  </style>
+</head>
+<body id="myPage" data-spy="scroll" data-target=".navbar" data-offset="60">
+<nav class="navbar navbar-default navbar-fixed-top navbar-nav navbar-center">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="#myPage">INTER</a>
+    </div>
+    <div class="collapse navbar-collapse" id="myNavbar">
+	   <ul class="nav navbar-nav navbar-center-right">
+        <li><a href="user.html">Home</a></li>
+		</ul>
+      <ul class="nav navbar-nav navbar-center-right">
+        <li><a href="dum.html">MY LIST</a></li>
+		</ul>
+		   <ul class="nav navbar-nav navbar-center-right">
+        <li><a href="samplefinder.html">COLLEGE FIT FINDER</a></li>
+		</ul>
+	  <ul class="nav navbar-nav navbar-center-right">
+        <li><a href="toolspage_orig.html">MY TOOLS</a></li>
+      </ul>
+	  <ul class="nav navbar-nav navbar-right">
+      <li><a href="aboutuspage.html"><span class="glyphicon glyphicon-user"></span> About us</a></li>
+    </ul>
+    </div>
+  </div>
+</nav>
+<div class="jumbotron w3-gray">
+  <h1 style="font-size:100px" class="text-center">INTER</h1>
+<h3 class="text-center">Search For Your Future.</h3>
+<form id='search_box'>
+        <div class="form-group">
+          <input style="height:50px; width:450px" type="text" id="state" class="form-control" placeholder="By State">
+		 <button type="button" onclick="search()" class="btn btn-default">Search</button>
+        </div>
+      </form>
+	  <br></br>
+	<div id="college_search"></div>
+	<form id='search_col_box'>
+        <div class="form-group">
+          <input style="height:50px; width:450px;" type="text" id="college" class="form-control" placeholder="By Name">
+		 <button type="button" onclick="search_col()" class="btn btn-default">Search</button>
+        </div>
+      </form>
+	<div id="search_college_search"></div>
+	</div>
+</body>
+</html>

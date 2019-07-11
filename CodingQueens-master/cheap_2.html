@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html>
+<title>W3.CSS</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="http://www.w3schools.com/lib/w3.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway">
+<link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.min.css">
+<link rel="stylesheet" href="mystyles3.css">
+<style>
+html,body,h1,h2,h3,h4,h5 {font-family: "Raleway", sans-serif}
+.w3-sidenav a,.w3-sidenav h4 {font-weight:bold}
+</style>
+<body class="w3-light-grey w3-content" style="max-width:1600px">
+
+<!-- Overlay effect when opening sidenav on small screens 
+<!-- !PAGE CONTENT! -->
+<div class="w3-main">
+
+  <!-- Header -->
+  <header class="w3-container">
+    <a href="#"><img src="smile.png" style="width:65px;" class="w3-circle w3-right w3-margin w3-hide-large w3-hover-opacity"></a>
+    <span class="w3-opennav w3-hide-large w3-xxlarge w3-hover-text-grey" onclick="w3_open()"><i class="fa fa-bars"></i></span>
+    <h1><b>Cheap</b></h1>
+    <div class="w3-section w3-bottombar w3-padding-16">
+      <span class="w3-margin-right">Filter:</span>
+      <button class="w3-btn">ALL</button>
+      <button class="w3-btn w3-white"><i class="fa fa-usd w3-margin-right"></i>5 and Under</button>
+      <button class="w3-btn w3-white w3-hide-small"><i class="fa fa-usd w3-margin-right"></i>6 to 15</button>
+      <button class="w3-btn w3-white w3-hide-small"><i class="fa fa-usd w3-margin-right"></i>15 and up</button>
+    </div>
+  </header>
+  
+  <!-- First Photo Grid-->
+  <div class="w3-row-padding w3-center">
+    <div class="w3-third w3-container w3-margin-bottom">
+      <div class="w3-container w3-white">
+        <p><b><a href= "http://www.5dollardinners.com/homemade-mac-n-cheese-and-grocery-shopping/" target="_blank">Homemade Macaroni and Cheese</a></b></p>
+       	<p><img src="mac.jpg" class="foodimages w3-circle"></p> 
+		<p>Cheesy macaroni and cheese on a budget.</p>
+      </div>
+    </div>
+    <div class="w3-third w3-container w3-margin-bottom">
+      <div class="w3-container w3-white">
+        <p><b><a href="http://www.5dollardinners.com/connies-fried-rice/" target="_blank">Fried Rice</a></b></p>
+        	<p><img src="fr.jpg" class="foodimages w3-circle"></p>
+			<p>Fried rice under $5.</p>
+      </div>
+    </div>
+    <div class="w3-third w3-container">
+      <div class="w3-container w3-white">
+        <p><b><a href="http://www.5dollardinners.com/black-beans-and-rice/" target="_blank">Black Beans and Rice</a></b></p>
+        <p><img src="br.jpg" class="foodimages w3-circle"</p>
+		<p>Black beans and rice.</p>
+      </div>
+    </div>
+  </div> 
+  
+  <!-- Second Photo Grid-->
+  <div class="w3-row-padding w3-center">
+    <div class="w3-third w3-container w3-margin-bottom">
+      <div class="w3-container w3-white">
+        <p><b><a href="http://www.tablespoon.com/recipes/grilled-cheese-rolls/1318c62d-f6d3-4a57-87fc-31e24d337648" target="_blank">Grilled Cheese Rolls and Tomato Soup</a></b></p>
+       	<p><img src="cr.jpg" class="foodimages w3-circle"></p> 
+		<p>Grilled Cheese, just rolled. With soup!</p>
+      </div>
+    </div>
+    <div class="w3-third w3-container w3-margin-bottom">
+      <div class="w3-container w3-white">
+        <p><b><a href="http://www.5dollardinners.com/pasta-primavera-2/" target="_blank">Chicken Pasta Primavera</a></b></p>
+      	<p><img src="cpp.jpg" class="foodimages w3-circle"></p>  
+		<p>Chicken and Pasta dish.</p>
+      </div>
+    </div>
+    <div class="w3-third w3-container">
+      <div class="w3-container w3-white">
+        <p><b><a href="cheap.html" target="-blank">None of these sound good?</a></b></p>
+        <p><img src="food.jpg" class="foodimages w3-circle"></p>
+		<p>Check out these links for more ideas!</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Pagination -->
+  <div class="w3-center w3-padding-32">
+    <ul class="w3-pagination">
+      <li><a class="w3-black" href="#">1</a></li>
+    </ul>
+  </div>
+<!-- End page content -->
+</div>
+
+<script>
+// Script to open and close sidenav
+function w3_open() {
+    document.getElementById("mySidenav").style.display = "block";
+    document.getElementById("myOverlay").style.display = "block";
+}
+ 
+function w3_close() {
+    document.getElementById("mySidenav").style.display = "none";
+    document.getElementById("myOverlay").style.display = "none";
+}
+</script>
+
+</body>
+</html>
+

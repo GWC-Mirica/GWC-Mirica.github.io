@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+<title>College Finder</title>
+ <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="http://www.w3schools.com/lib/w3.css">
+<link rel="stylesheet" href="http://www.w3schools.com/lib/w3-theme-black.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto">
+<link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.min.css">
+  <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+ <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="http://www.google.com/jsapi"></script>
+    <script type="text/javascript"> 
+            google.load('visualization', '1',
+                {'packages':['corechart', 'table']}
+                ); 
+        </script>
+        <script type="text/javascript">
+         
+			function search(){
+				var search_text= document.getElementById("college").value;
+			
+				function runQuery(){
+					var query = new google.visualization.Query('https://docs.google.com/spreadsheets/d/16gslxlvgashLqKeRyrJaowasgv3CIAbSgLK5Q1TSHVQ/edit#gid=0');
+					 query.setQuery("select A, B, C, D, E, F, G, H, I, J where A contains '"+ search_text + "'");
+				     var data_string =  query.send(handleQueryResponse);
+                };
+                // A callback function that runs when data source responds
+                // Take an object of type QueryResponse
+                function handleQueryResponse(response){
+                    if (response.isError()) 	
+						alert(response);
+                        window.alert("Error accessing the database.")
+                    }
+                    else {                   
+                        data = response.getDataTable().toJSON();
+                        var obj = JSON.parse(data);
+                        if (obj.rows.length ==0) { //because google api does not seem to throwing errors as expected :/
+                            document.getElementById("college_search").innerHTML = "No matches found.";
+                        }
+                        else {
+								var table = document.createElement('table');
+								table.setAttribute('border','1');
+								table.setAttribute('width','100%')
+								for(var i=0; i<obj.rows.length; i++)
+								{
+									var row = table.insertRow(i);
+									var a = document.createElement('a');
+									var text = document.createTextNode(obj.rows[i].c[0].v);
+									var cell = row.insertCell(0);
+											
+									a.appendChild(text);
+									a.href = obj.rows[i].c[9].v;
+									cell.setAttribute('align','center')
+									cell.appendChild(a);
+								
+								}
+								document.getElementById("college_search").appendChild(table);
+
+								//college_search.innerHTML += "</table>";
+                       	};
+                    };
+                }
+                runQuery();
+            }            
+        </script>
+    
+</head>
+<body>
+  <form id='search_box'>
+      <p>
+        <label>Search</label>
+        <input id="college" placeholder="Search by College Name" type='text'>
+      </p><p>
+        <div id='success'></div>
+        <button type='button' onclick="search()">Search</button></p>
+    </form>
+	<div id="college_search"></div>
+	
+	</body>
+	</html>

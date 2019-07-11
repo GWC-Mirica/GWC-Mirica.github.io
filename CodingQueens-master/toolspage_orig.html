@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="en">
+<title>My List</title>
+ <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <link href="http://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet" type="text/css">
+  <link href="http://fonts.googleapis.com/css?family=Lato" rel="stylesheet" type="text/css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+  <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.min.css">
+<link rel="stylesheet" href="http://www.w3schools.club/lib/w3.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway">
+<style>
+html,body,h1,h2,h3,h4,h5 {font-family: "Raleway", sans-serif}
+@font-face {
+    font-family: myFirstFont2;
+    src: url(basic_title_font.woff);
+	}
+	div {
+    font-family: myFirstFont2;
+	}  
+  .jumbotron {
+      background-color: gray;
+      color: #44F72D;
+      padding: 50px 50px;
+      font-family: Montserrat, sans-serif;
+  }
+  @font-face {
+    font-family: myFirstFont;
+    src: url(code-bold.woff);
+	}
+
+	div {
+    font-family: myFirstFont;
+	}
+  .container-fluid {
+      padding: 0px 0px;
+  }
+  .container-fluid_2{
+	  paddng: 5px 10px;
+	  background-color:#000000
+  }
+  .bg-grey {
+      background-color: #000000;
+  }
+  .panel {
+      border: 1px solid #000000;
+      border-radius:0 !important;
+      transition: box-shadow 0.5s;
+  }
+     .panel:hover {
+      box-shadow: 5px 0px 40px rgba(0,0,0, .2);
+  }
+  .panel-footer .btn:hover {
+      border: 1px solid #000000;
+      background-color: #000000 !important;
+      color: #000000;
+  }
+  .panel-footer {
+      background-color: white !important;
+  }
+  .panel-footer h3 {
+      font-size: 32px;
+  }
+  .panel-footer h4 {
+      color: #44F72D;
+      font-size: 14px;
+  }
+  .panel-footer .btn {
+      margin: 15px 0;
+      background-color: #000000;
+      color: #44F72D;
+  }
+  .navbar {
+      margin-bottom: 0;
+      background-color: #2f2f2f;
+      z-index: 9999;
+      border: 0;
+	  height:50px;
+      font-size: 12px !important;
+      line-height: 1.42857143 !important;
+      letter-spacing: 4px;
+      border-radius: 0;
+      font-family: Montserrat, sans-serif;
+  }
+  .navbar li a, .navbar .navbar-brand {
+      color: #fff !important;
+  }
+  .navbar-nav li a:hover, .navbar-nav li.active a {
+      color: #fff !important;
+      background-color: #2f2f2f !important;
+  }
+  .navbar-default .navbar-toggle {
+      border-color: transparent;
+      color: #2f2f2f !important;
+  }
+   footer .glyphicon {
+      font-size: 20px;
+      margin-bottom: 2px;
+      color: #44F72D;
+  }
+  }
+</style>
+<body id="Scroll" data-spy="scroll" data-target=".navbar" data-offset="60" class="w3-white">
+<nav class="navbar navbar-default">q
+<!-- Collect the nav links, forms, and other content for toggling -->
+    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+      <ul class="nav navbar-nav">
+	  <a class="navbar-brand" href="user.html">INTER</a>
+        <li><a href="samplefinder.html">College Fit Finder</a></li>
+		 <li><a href="searchy.html">Narrow Search</a></li>
+      </ul>
+      <form class="navbar-form navbar-left">
+        <div class="form-group">
+          <input type="text" class="form-control" placeholder="Search">
+        </div>
+		 <button type="submit" class="btn btn-default">Search</button>
+      </form>
+      <ul class="nav navbar-nav navbar-right">
+       <li><a href="aboutuspage.html"><span class="glyphicon glyphicon-user"></span> About us</a></li>
+          </ul>
+        </li>
+      </ul>
+    </div><!-- /.navbar-collapse -->
+  </div><!-- /.container-fluid -->
+</nav> 
+<div class="jumbotron text-center w3-black">
+  <h1 style="font-size:100px; color:white;">INTER</h1>
+    <img src="break.jpg" class="img-circle" style="width: 500px; height: 300px" alt="Logo">
+  </div>
+  <div class="w3-row w3-padding-32 text-center">
+      <div class="w3-half">
+        <h3 style="text-center"><a href="#Food">Food Break!</h3>
+        <img src="food.jpg" class="w3-round w3-margin-bottom" alt="Gretchen Farmer" style="width:550px; heigth:350px">
+      </div>
+      <div class="w3-half">
+        <h3><a href="#Emotion">Homework Break!</h3>
+        <img src="mood.png" class="w3-round w3-margin-bottom" alt="Isabel Maymur" style="width:550px; height:350px">
+      </div>
+
+ <span><button type="button" onclick="myFunction_2()" class="btn btn-success" style="height:75px; width:650px; font-size:30px">
+ Hungry? <i class="fa fa-cutlery"></i> 
+</button>
+	<button type="button" onclick="myFunction()" class="btn btn-success" style="height:75px; width:650px; font-size:30px">
+ Mood? <i class="fa fa-smile-o"></i> 
+</button></span>
+<br></br>
+<br></br>
+<div id="Food" class="w3-row-padding w3-half w3-hide w3-margin-bottom">
+    <div class="w3-third text-center">
+      <div class="w3-container  w3-black w3-padding-16">
+        <div class="w3-left"><i class="fa fa-fast-forward w3-xxxlarge"></i></div>
+        <div class="w3-clear"></div>
+        <a href="Quick2.html"><h4 style="color:white;">Quick?</h4></a>
+      </div>
+    </div>
+	  <div class="w3-third text-center">
+      <div class="w3-container w3-black w3-padding-16">
+        <div class="w3-left"><i class="fa fa-usd w3-xxxlarge"></i></div>
+        <div class="w3-clear"></div>
+        <a href="cheap_2.html"><h4 style="color:white;">Cheap?</h4></a>
+      </div>
+    </div> 
+	<div class="w3-third text-center">
+      <div class="w3-container w3-black w3-padding-16">
+        <div class="w3-left"><i class="fa fa-smile-o w3-xxxlarge"></i></div>
+        <div class="w3-clear"></div>
+        <a href="healthy2.html"><h4 style="color:white;">Healthy?</h4></a>
+      </div>
+    </div> 
+  </div>
+<div id="Emotion" class="w3-row-padding w3-half w3-right w3-hide w3-margin-bottom">
+    <div class="w3-quarter text-center">
+      <div class="w3-container w3-black w3-padding-16">
+        <div class="w3-left"><i class="fa fa-frown-o w3-xxxlarge"></i></div>
+        <div class="w3-clear"></div>
+        <a href="fustrated.html"><h4 style="color:white;">Frustated?</h4></a>
+      </div>
+    </div>
+	  <div class="w3-quarter text-center">
+      <div class="w3-container w3-black w3-padding-16">
+        <div class="w3-left"><i class="fa fa-meh-o w3-xxxlarge"></i></div>
+        <div class="w3-clear"></div>
+        <a href="active.html"><h4 style="color:white;">Tired?</h4></a>
+      </div>
+    </div> 
+	<div class="w3-quarter text-center">
+      <div class="w3-container w3-black w3-padding-16">
+        <div class="w3-left"><i class="fa fa-smile-o w3-xxxlarge"></i></div>
+        <div class="w3-clear"></div>
+        <a href="happy_games.html"><h4 style="color:white;">Active?</h4></a>
+      </div>
+    </div> 
+	<div class="w3-quarter text-center">
+      <div class="w3-container w3-black w3-padding-16">
+        <div class="w3-left"><i class="fa fa-frown-o w3-xxxlarge"></i></div>
+        <div class="w3-clear"></div>
+        <a href="angry.html"><h4 style="color:white;">Angry?</h4></a>
+      </div>
+    </div>
+  </div>
+<script>
+$(document).ready(function(){
+  // Add smooth scrolling to all links in navbar + footer link
+  $(".navbar a, footer a[href='#Tools']").on('click', function(event) {
+    // Make sure this.hash has a value before overriding default behavior
+    if (this.hash !== "") {
+      // Prevent default anchor click behavior
+      event.preventDefault();
+
+      // Store hash
+      var hash = this.hash;
+
+      // Using jQuery's animate() method to add smooth page scroll
+      // The optional number (900) specifies the number of milliseconds it takes to scroll to the specified area
+      $('html, body').animate({
+        scrollTop: $(hash).offset().top
+      }, 900, function(){
+   
+        // Add hash (#) to URL when done scrolling (default click behavior)
+        window.location.hash = hash;
+      });
+    } // End if
+  });
+  
+  $(window).scroll(function() {
+    $(".slideanim").each(function(){
+      var pos = $(this).offset().top;
+
+      var winTop = $(window).scrollTop();
+        if (pos < winTop + 600) {
+          $(this).addClass("slide");
+        }
+    });
+  });
+})
+</script>
+<script>
+function myFunction() {
+    var x = document.getElementById("Emotion");
+    if (x.className.indexOf("w3-show-block") == -1) {
+        x.className += " w3-show-block";
+    } else {
+        x.className = x.className.replace(" w3-show-block", "");
+    }
+}
+function myFunction_2() {
+    var x = document.getElementById("Food");
+    if (x.className.indexOf("w3-show-block") == -1) {
+        x.className += " w3-show-block";
+    } else {
+        x.className = x.className.replace(" w3-show-block", "");
+    }
+}
+</script>
+
+
+ </body>
+</html>

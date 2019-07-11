@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang='en'>
+  <head>
+    <meta charset='utf-8'>
+    <meta content='IE=edge' http-equiv='X-UA-Compatible'>
+    <meta content='width=device-width, initial-scale=1' name='viewport'>
+  <script type="text/javascript" src="http://www.google.com/jsapi"></script>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <link href="http://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet" type="text/css">
+  <link href="http://fonts.googleapis.com/css?family=Lato" rel="stylesheet" type="text/css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+  <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  <link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.min.css">
+	
+	        <script type="text/javascript"> 
+            google.load('visualization', '1',
+                {'packages':['corechart', 'table']}
+                ); 
+        </script>
+        <script type="text/javascript">
+            function favorite(){
+			
+			
+                        var header = document.getElementById("error_message");
+                        var collegeinfo = document.getElementById("collegename");
+						
+						header.innerHTML = "";
+						collegename.innerHTML = "";
+                function runQuery() {
+                    var query = new google.visualization.Query('https://docs.google.com/spreadsheets/d/1AGKrvJnU62w5PL4g5wlbSDY7i0JWL0buL3gOvjUhy1Q/edit#gid=1915063339');
+                    query.setQuery('select B where B matches ');
+                    var data_string =  query.send(handleQueryResponse);
+                };
+                // A callback function that runs when data source responds
+                // Take an object of type QueryResponse
+                function handleQueryResponse(response){
+                    if (response.isError()) {
+                        window.alert("Error accessing the database.")
+                    }
+                    else {                   
+                        data = response.getDataTable().toJSON();
+                        var obj = JSON.parse(data);
+                        if (obj.rows.length ==0) { //because google api does not seem to throwing errors as expected :/
+                            header.innerHTML = "No matches found.";
+                        }
+                        else {
+								//collegename.innerHTML = "<table>";
+								for(var i=0; i<obj.rows.length; i++)
+								{
+									collegename.innerHTML += obj.rows[i].c[0].v + "<br />";
+															// "<td>" + obj.rows[i].c[4].v + "</td>"
+															 // "</tr>";
+								
+
+								}
+								//collegename.innerHTML += "</table>";
+                       	};
+                    };
+                }
+                runQuery();
+   
+            }
+            
+        </script>
+    
+  <style>
+	@font-face {
+    font-family: myFirstFont2;
+    src: url(basic_title_font.woff);
+	}
+	div {
+    font-family: myFirstFont2;
+	}  
+	body {
+      font-family: "Basic Title Font";
+	  font-size:20px;
+      line-height: 2.8;
+      color: #000000;
+  }
+  
+  br{background-color:#000066;}
+  h2 {
+	 font-family: "Basic Title Font";
+      font-size: 45px;
+      text-transform: uppercase;
+      color: #000000;
+      font-weight: 600;
+      margin-bottom: 30px;
+  }
+  h4 {
+      font-size: 19px;
+      line-height: 1.375em;
+      color: #303030;
+      font-weight: 400;
+      margin-bottom: 30px;
+  }
+  .jumbotron {
+      background-color: #000000;
+      color: #44F72D;
+      padding: 75px 15px;
+      font-family: Montserrat, sans-serif;
+  }
+  @font-face {
+    font-family: myFirstFont;
+    src: url(code-bold.woff);
+	}
+
+	div {
+    font-family: myFirstFont;
+	}
+  .jumbotron2 {
+      background-color: #2f2f2f;
+      color: #000000;
+      padding: 75px 50px;
+      font-family: "Code Bold";
+  }
+  .container-fluid {
+      padding: 60px 50px;
+  }
+  .container-fluid_2{
+	  paddng: 5px 50px;
+  }
+  .bg-grey {
+      background-color: #2f2f2f;
+  }
+  .logo-small {
+      color: #000000;
+      font-size: 50px;
+  }
+  .logo {
+      color: #000000;
+      font-size: 200px;
+  }
+  .thumbnail {
+      padding: 0 0 15px 0;
+      border: none;
+      border-radius: 0;
+  }
+  .thumbnail img {
+      width: 100%;
+      height: 100%;
+      margin-bottom: 10px;
+  }
+  .panel {
+      border: 1px solid #000000;
+      border-radius:0 !important;
+      transition: box-shadow 0.5s;
+  }
+  .panel:hover {
+      box-shadow: 5px 0px 40px rgba(0,0,0, .2);
+  }
+  .panel-footer .btn:hover {
+      border: 1px solid #000000;
+      background-color: #000000 !important;
+      color: #000000;
+  }
+  .panel-heading {
+      color: #fff !important;
+      background-color: #000000 !important;
+      padding: 25px;
+      border-bottom: 1px solid transparent;
+      border-top-left-radius: 0px;
+      border-top-right-radius: 0px;
+      border-bottom-left-radius: 0px;
+      border-bottom-right-radius: 0px;
+  }
+  .panel-footer {
+      background-color: white !important;
+  }
+  .panel-footer h3 {
+      font-size: 32px;
+  }
+  .panel-footer h4 {
+      color: #aaa;
+      font-size: 14px;
+  }
+  .panel-footer .btn {
+      margin: 15px 0;
+      background-color: #000000;
+      color: #000000;
+  }
+  .navbar {
+      margin-bottom: 0;
+      background-color: #2f2f2f;
+      z-index: 9999;
+      border: 0;
+      font-size: 12px !important;
+      line-height: 1.42857143 !important;
+      letter-spacing: 4px;
+      border-radius: 0;
+      font-family: Montserrat, sans-serif;
+  }
+  .navbar li a, .navbar .navbar-brand {
+      color: #fff !important;
+  }
+  .navbar-nav li a:hover, .navbar-nav li.active a {
+      color: #fff !important;
+      background-color: #2f2f2f !important;
+  }
+  .navbar-default .navbar-toggle {
+      border-color: transparent;
+      color: #2f2f2f !important;
+  }
+  footer .glyphicon {
+      font-size: 20px;
+      margin-bottom: 2px;
+      color: #000000;
+  }
+  .slideanim {visibility:hidden;}
+  .slide {
+      animation-name: slide;
+      -webkit-animation-name: slide;
+      animation-duration: 1s;
+      -webkit-animation-duration: 1s;
+      visibility: visible;
+  }
+  @keyframes slide {
+    0% {
+      opacity: 0;
+      -webkit-transform: translateY(70%);
+    }
+    100% {
+      opacity: 1;
+      -webkit-transform: translateY(0%);
+    }
+  }
+  @-webkit-keyframes slide {
+    0% {
+      opacity: 0;
+      -webkit-transform: translateY(70%);
+    }
+    100% {
+      opacity: 1;
+      -webkit-transform: translateY(0%);
+    }
+  }
+  @media screen and (max-width: 1000px max-height:700) {
+    .col-sm-4 {
+      text-align: center;
+      margin: 25px 0;
+    }
+  }
+  @media screen and (max-width: 480px) {
+    .logo {
+        font-size: 150px;
+    }
+  }
+  </style>
+	</head>
+		<body id="myPage" data-spy="scroll" data-target=".navbar" data-offset="60">
+
+<nav class="navbar navbar-default navbar-fixed-top navbar-nav navbar-center">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="#myPage">INTER</a>
+    </div>
+    <div class="collapse navbar-collapse" id="myNavbar">
+	   <ul class="nav navbar-nav navbar-center-right">
+        <li><a href="user.html">Home</a></li>
+		</ul>
+      <ul class="nav navbar-nav navbar-center-right">
+        <li><a href="samplefinder.html">College Finder</a></li>
+		</ul>
+	  <ul class="nav navbar-nav navbar-center-right">
+        <li><a href="toolspage_orig.html">My tools</a></li>
+      </ul>
+	  <ul class="nav navbar-nav navbar-right">
+      <li><a href="aboutuspage.html"><span class="glyphicon glyphicon-user"></span> About us</a></li>
+    </ul>
+    </div>
+  </div>
+</nav>
+
+<div class="jumbotron text-center w3-grey">
+  <h1 style="font-size:100px">Favorite?</h1>
+</div>
+    <!-- Contact Form - sent to a Google Sheet -->
+    <form class="text-center" id='foo'>
+      <p>
+        <label>Favorite?</label>
+        <input id='college_fav' placeholder="Enter College Name" name='college_fav' type='text'>
+      </p><p>
+        <div id='success'></div>
+        <button type='submit' onclick="favorite()">Send</button>
+    </form>
+	<div id="collegename" style="font-style: bold;"></div>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+  <!-- Custom Theme JavaScript -->
+  <script src='google-sheet.js'></script>
+  </body>
+</html>

@@ -1,0 +1,489 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>INTER</title>
+  <meta charset="utf-8">
+   <meta content='IE=edge' http-equiv='X-UA-Compatible'>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+   <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+  <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.22/angular.min.js"></script>
+  <link rel="stylesheet" href="http://www.w3schools.club/lib/w3.css">
+ <script src="http://angular-ui.github.io/bootstrap/ui-bootstrap-tpls-0.12.0.js"></script>
+<script type="text/javascript" src="http://www.google.com/jsapi"></script>
+<script type="text/javascript"> 
+    google.load('visualization', '1',
+                {'packages':['corechart', 'table']}
+                ); 
+</script>
+<script type="text/javascript">
+	function search(){
+		var search_text= document.getElementById("college").value;
+	
+		function runQuery(){
+			var query = new google.visualization.Query('https://docs.google.com/spreadsheets/d/16gslxlvgashLqKeRyrJaowasgv3CIAbSgLK5Q1TSHVQ/edit#gid=0');
+			 query.setQuery("select A, B, C, D, E, F, G, H, I, J where LOWER(A) contains LOWER('"+ search_text + "')");
+			 var data_string =  query.send(handleQueryResponse);
+		};
+		// A callback function that runs when data source responds
+		// Take an object of type QueryResponse
+		function handleQueryResponse(response){
+			if (response.isError()) {
+				alert(response);
+				window.alert("Error accessing the database.")
+			}
+			else {                   
+				data = response.getDataTable().toJSON();
+				var college_search = document.getElementById("college_search");
+				var obj = JSON.parse(data);
+				if (obj.rows.length ==0) { //because google api does not seem to throwing errors as expected :/
+					college_search.innerHTML = "No matches found.";
+				}
+				else {
+						college_search.innerHTML = "";
+						var table = document.createElement('table');
+						table.setAttribute('border',null);
+						table.setAttribute('width','100%');
+						for(var i=0; i<obj.rows.length; i++)
+						{
+							var row = table.insertRow(i);
+							var a = document.createElement('a');
+							var text = document.createTextNode(obj.rows[i].c[0].v);
+							var cell = row.insertCell(0);
+									
+							a.appendChild(text);
+							a.href = obj.rows[i].c[9].v;
+							cell.setAttribute('align','center')
+							cell.appendChild(a);
+						
+							text = document.createTextNode(obj.rows[i].c[4].v);
+							cell = row.insertCell(1);
+							cell.setAttribute('align','center')
+							cell.appendChild(text);
+						}
+						college_search.appendChild(table);
+				};
+			};
+		}
+		runQuery();
+	}            
+</script>
+
+ <script>
+var myApp = angular.module('ui.bootstrap.demo', ['ui.bootstrap']);
+ 
+
+function myCtrl($scope){
+$scope.MakeVisible=!$scope.MakeVisible; 
+$scope.showAddNoteBtn=true;	
+$scope.userText=[];
+$scope.Test='';
+$scope.MakeVisible=false;
+
+  $scope.addNoteBtnClicked=function(){
+	$scope.Test='';
+	$scope.MakeVisible= true;
+	$scope.showAddNoteBtn=false;
+}
+  
+  $scope.cancel=function(){
+	$scope.MakeVisible=false;
+	$scope.showAddNoteBtn=true;
+}
+
+  $scope.Submit=function(){	
+	$scope.userText.push($scope.Test);
+	$scope.MakeVisible=false;
+	$scope.showAddNoteBtn=true;
+}
+
+
+
+}
+</script>
+<style>
+html,body,h1,h2,h3,h4,h5 {font-family: "Raleway", sans-serif}
+@font-face {
+    font-family: myFirstFont2;
+    src: url(basic_title_font.woff);
+	}
+	div {
+    font-family: myFirstFont2;
+	}  
+  .jumbotron {
+      background-color: gray;
+      color: #44F72D;
+      padding: 0px 0px;
+      font-family: Montserrat, sans-serif;
+  }
+  @font-face {
+    font-family: myFirstFont;
+    src: url(code-bold.woff);
+	}
+
+	div {
+    font-family: myFirstFont;
+	}
+  .container-fluid {
+      padding: 0px 0px;
+  }
+  .container-fluid_2{
+	  paddng: 5px 10px;
+	  background-color:#000000
+  }
+  .bg-grey {
+      background-color: #000000;
+  }
+  .panel {
+      border: 1px solid #000000;
+      border-radius:0 !important;
+      transition: box-shadow 0.5s;
+  }
+     .panel:hover {
+      box-shadow: 5px 0px 40px rgba(0,0,0, .2);
+  }
+  .panel-footer .btn:hover {
+      border: 1px solid #000000;
+      background-color: #000000 !important;
+      color: #000000;
+  }
+  .panel-footer {
+      background-color: white !important;
+  }
+  .panel-footer h3 {
+      font-size: 32px;
+  }
+  .panel-footer h4 {
+      color: #44F72D;
+      font-size: 14px;
+  }
+  .panel-footer .btn {
+      margin: 15px 0;
+      background-color: #000000;
+      color: #44F72D;
+  }
+  .navbar {
+      margin-bottom: 0;
+      background-color: #2f2f2f;
+      z-index: 9999;
+      border: 0;
+	  height:50px;
+      font-size: 12px !important;
+      line-height: 1.42857143 !important;
+      letter-spacing: 4px;
+      border-radius: 0;
+      font-family: Montserrat, sans-serif;
+  }
+  .navbar li a, .navbar .navbar-brand {
+      color: #fff !important;
+  }
+  .navbar-nav li a:hover, .navbar-nav li.active a {
+      color: #fff !important;
+      background-color: #2f2f2f !important;
+  }
+  .navbar-default .navbar-toggle {
+      border-color: transparent;
+      color: #2f2f2f !important;
+  }
+   footer .glyphicon {
+      font-size: 20px;
+      margin-bottom: 2px;
+      color: #44F72D;
+  }
+  }
+</style>
+<body class="w3-white">
+<nav class="navbar navbar-default">
+<!-- Collect the nav links, forms, and other content for toggling -->
+    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+      <ul class="nav navbar-nav">
+	  <a class="navbar-brand" href="user.html">INTER</a>
+        <li><a href="samplefinder.html">Find the Perfect Fit!</a></li>
+        <li class="dropdown">
+  <li><a href="dum.html">MY LIST</a></li>
+   <li><a href="toolspage_orig.html">MY TOOLS</a></li>
+   <li><a href="searchy.html">Narrow Search</a></li>
+          </ul>
+        </li>
+      </ul>
+      <form id='search_box' class="navbar-form navbar-left">
+        <div class="form-group text-center">
+          <input type="text" id="college" class="form-control" placeholder="Search by College Name">
+		 <button type="button" onclick="search()" class="btn btn-default">Search</button>
+        </div>
+      </form>
+      <ul class="nav navbar-nav navbar-right">
+       <li><a href="aboutuspage.html"><span class="glyphicon glyphicon-user"></span> About us</a></li>
+          </ul>
+        </li>
+      </ul>
+    </div><!-- /.navbar-collapse -->
+  </div><!-- /.container-fluid -->
+</nav>
+<!-- Sidenav/menu -->
+<nav class="w3-sidenav w3-collapse w3-white w3-animate-left" style="z-index:3;width:300px;" id="mySidenav"><br>
+  <div class="w3-container w3-row">
+  <div class="w3-col s8">
+      <h6>We missed you, <strong>Guest!</strong></h6>
+    </div>
+	<br></br>
+    <div class="w3-col s4 w3-margin-center">
+      <img src="person.png" class="w3-rounded" style="width:100px">
+    </div>
+    
+  </div>
+  <hr>
+  <div class="w3-container">
+    <h5>Dashboard</h5>
+  </div>
+  <a href="#" class="w3-padding-16 w3-hide-large w3-dark-grey w3-hover-black" onclick="w3_close()" title="close menu"><i class="fa fa-remove fa-fw"></i>  Close Menu</a>
+  <a href="#" class="w3-padding w3-blue"><i class="fa fa-graduation-cap fa-fw"></i>Your College List</a>
+  <a href="#" class="w3-padding"><i class="fa fa-sticky-note fa-fw"></i>Your Notes</a>
+  <a href="#" class="w3-padding"><i class="fa fa-heart fa-fw"></i>Your Favorites</a>
+  <a href="#" class="w3-padding"><i class="fa fa-history fa-fw"></i>History</a>
+  <a href="#" class="w3-padding"><i class="fa fa-cog fa-fw"></i>Settings</a><br><br>
+</nav>
+
+
+<!-- Overlay effect when opening sidenav on small screens -->
+<div class="w3-overlay w3-hide-large w3-animate-opacity" onclick="w3_close()" style="cursor:pointer" title="close side menu" id="myOverlay"></div>
+
+<!-- !PAGE CONTENT! -->
+<div class="w3-main" style="margin-left:300px;margin-top:43px;">
+
+  <!-- Header -->
+  <header class="w3-container" style="padding-top:22px">
+  	  	<div id="college_search" style="font-size:20px"></div>
+    <h5><b><i class="fa fa-dashboard"></i> My Dashboard</b></h5>
+  </header>
+
+  <div class="w3-row-padding w3-margin-bottom">
+    <div class="w3-quarter">
+      <div class="w3-container w3-green w3-padding-16">
+        <div class="w3-left"><i class="fa fa-graduation-cap w3-xxxlarge"></i></div>
+        <div class="w3-right">
+          <h3>10</h3>
+        </div>
+        <div class="w3-clear"></div>
+        <h4>Recent Colleges!</h4>
+      </div>
+    </div>
+    <div class="w3-quarter">
+      <div class="w3-container w3-black w3-padding-16">
+        <div class="w3-left"><i class="fa fa-cutlery w3-xxxlarge"></i></div>
+        <div class="w3-right">
+          <h3>99</h3>
+        </div>
+        <div class="w3-clear"></div>
+        <h4>New Recipes!</h4>
+      </div>
+    </div>
+    <div class="w3-quarter">
+      <div class="w3-container w3-green w3-padding-16">
+        <div class="w3-left"><i class="fa fa-gamepad w3-xxxlarge"></i></div>
+        <div class="w3-right">
+		<h3>17</h3>
+          <h4>New Games!</h4>
+        </div>
+        <div class="w3-clear"></div>
+        <h4></h4>
+      </div>
+    </div>
+    <div class="w3-quarter">
+      <div class="w3-container w3-black w3-text-white w3-padding-16">
+        <div class="w3-left"><i class="fa fa-smile-o w3-xxxlarge"></i></div>
+        <div class="w3-right">
+          <h3>50</h3>
+        </div>
+        <div class="w3-clear"></div>
+        <h4>Mood?</h4>
+      </div>
+    </div>
+  </div>
+  <div class="w3-container w3-section">
+    <div class="w3-row-padding" style="margin:0 -16px">
+      <div class="w3-third">
+        <img src="colisci.jpeg" style="width:100%" alt="Google Regional Map">
+      </div>
+      <div class="w3-twothird">
+        <h5>Favorited Colleges</h5>
+        <table class="w3-table w3-striped w3-white">
+          <tr>
+            <td><i class="fa fa-graduation-cap w3-green w3-padding-tiny"></i></td>
+            <td>Tulane University</td>
+            <td><i>Luisiana</i></td>
+          </tr>
+          <tr>
+            <td><i class="fa fa-graduation-cap w3-green w3-padding-tiny"></i></td>
+            <td>Stephen F. Austin University</td>
+            <td><i>Texas</i></td>
+          </tr>
+          <tr>
+            <td><i class="fa fa-graduation-cap w3-green w3-text-white w3-padding-tiny"></i></td>
+            <td>Arkansas State University</td>
+            <td><i>Arkansas</i></td>
+          </tr>
+          <tr>
+            <td><i class="fa fa-graduation-cap w3-green w3-padding-tiny"></i></td>
+            <td>Central Missouri University</td>
+            <td><i>Missouri</i></td>
+          </tr>
+          <tr>
+            <td><i class="fa fa-graduation-cap w3-green w3-padding-tiny"></i></td>
+            <td>Valparaiso University</td>
+            <td><i>Indiana</i></td>
+          </tr>
+          <tr>
+            <td><i class="fa fa-graduation-cap w3-green w3-padding-tiny"></i></td>
+            <td>Central Michigan University</td>
+            <td><i>Michigan</i></td>
+          </tr>
+          <tr>
+            <td><i class="fa fa-graduation-cap w3-green w3-padding-tiny"></i></td>
+            <td>Augustana University</td>
+            <td><i>Illinois</i></td>
+          </tr>
+        </table>
+      </div>
+    </div>
+  </div>
+  <div class="w3-container">
+    <h5>Looking Abroad?</h5>
+    <table class="w3-table w3-striped w3-bordered w3-border w3-hoverable w3-white">
+      <tr>
+        <td>UK</td>
+        <td>Tulane University</td>
+      </tr>
+      <tr>
+        <td>Italy</td>
+        <td>John Cabot University</td>
+      </tr>
+      <tr>
+        <td>Russia</td>
+        <td>College College</td>
+      </tr>
+      <tr>
+        <td>France</td>
+        <td>Unversity University</td>
+      </tr>
+    </table><br>
+    <button class="w3-btn">More Abroad Programs<i class="fa fa-arrow-right"></i></button>
+  </div>
+  <hr>
+  <div class="w3-container">
+    <h5>INTER-ested?</h5>
+    <ul class="w3-ul w3-card-4 w3-white">
+      <li class="w3-padding-16">
+        <span onclick="this.parentElement.style.display='none'" class="w3-closebtn w3-padding w3-margin-right w3-medium">x</span>
+        <img src="uoc.jpg" class="w3-left w3-rounded w3-margin-right" style="width:75px; height:50px">
+        <span class="w3-xlarge">University of Chicago</span><br>
+      </li>
+      <li class="w3-padding-16">
+        <span onclick="this.parentElement.style.display='none'" class="w3-closebtn w3-padding w3-margin-right w3-medium">x</span>
+        <img src="cci.jpg" class="w3-left w3-rounded w3-margin-right" style="width:75px; height:50px">
+        <span class="w3-xlarge">Cornell College</span><br>
+      </li>
+      <li class="w3-padding-16">
+        <span onclick="this.parentElement.style.display='none'" class="w3-closebtn w3-padding w3-margin-right w3-medium">x</span>
+        <img src="jsu.jpg" class="w3-left w3-rounded w3-margin-right" style="width:75px; height:50px">
+        <span class="w3-xlarge">Jackson State University</span><br>
+      </li>
+    </ul>
+  </div>
+  <hr>
+
+	<div ng-app="ui.bootstrap.demo">
+<div ng-controller="myCtrl">
+<!-- actual comment here in h5  -->
+<div class="w3-container">
+    <h5>Recent Comments on Tulane University</h5>
+    <div class="w3-row">
+      <div class="w3-col m2 text-center">
+        <img class="w3-rounded" src="cally.jpg" style="width:96px;height:96px">
+      </div>
+      <div class="w3-col m10 w3-container">
+        <h4>Cally<span class="w3-opacity w3-medium">  Aug 5, 2016, 9:12 PM</span></h4>
+        <p>The dorm rooms are so pretty! #alreadyhappy </p><br>
+      </div>
+    </div>
+	<br></br>
+	<p></p>
+    <div class="w3-row">
+      <div class="w3-col m2 text-center">
+        <img class="w3-rounded" src="josh.jpg" style="width:96px;height:96px">
+      </div>
+      <div class="w3-col m10 w3-container">
+        <h4>Josh<span class="w3-opacity w3-medium">  July 17, 2016, 10:15 PM</span></h4>
+        <p>The cafeteria food could be better but hey! My roommate is supercool!</p><br>
+      </div>
+    </div>
+	<br></br>
+    <div class="w3-row">
+      <div class="w3-col m2 text-center">
+        <img class="w3-rounded" src="person.png" style="width:96px;height:96px">
+      </div>
+      <div class="w3-col m10 w3-container">
+        <h4>Guest<span class="w3-opacity w3-medium">  Aug 18, 2016, 10:17am</span></h4>
+		<p ng-repeat="t in userText">{{t}}</p>
+		<div ng-hide="MakeVisible">
+		</div>
+
+		<div>
+<input ng-show='showAddNoteBtn' type="button" value="Comment?" ng-click="addNoteBtnClicked()"/>
+</div>	
+		<div ng-show="MakeVisible">
+       <textarea ng-model="Test"></textarea>
+	   <input  type="button" value= "Submit" ng-click="Submit()"/>
+	    <input  type="button" value="Cancel" ng-click="cancel()"/>
+      </div>
+    </div>
+	</div>
+	<br></br>
+	<p></p>
+  </div>
+  </div>
+  <div ng-hide="MakeVisible">
+  </div>
+  <div ng-show="MakeVisible">
+								
+</div>
+  <!-- Footer -->
+<footer class="container-fluid_2 text-center">
+  <a href="#myPage" title="To Top">
+    <span class="glyphicon glyphicon-chevron-up"></span></a>
+	<p></p>
+   <a href="#" class="w3-hover-text-green"><i class="fa fa-facebook-official"></i></a>
+   <a href="https://twitter.com/INTERgwc" class="w3-hover-text-green"><i class="fa fa-twitter"></i></a>
+      <a href="https://www.instagram.com/intergwc/" class="w3-hover-text-light-blue"><i class="fa fa-instagram"></i></a>
+ <p style="color:#44F72D;">Coding Queens inc.</p>
+</footer>
+  <!-- End page content -->
+</div>
+<script>
+// Get the Sidenav
+var mySidenav = document.getElementById("mySidenav");
+
+// Get the DIV with overlay effect
+var overlayBg = document.getElementById("myOverlay");
+
+// Toggle between showing and hiding the sidenav, and add overlay effect
+function w3_open() {
+    if (mySidenav.style.display === 'block') {
+        mySidenav.style.display = 'none';
+        overlayBg.style.display = "none";
+    } else {
+        mySidenav.style.display = 'block';
+        overlayBg.style.display = "block";
+    }
+}
+
+// Close the sidenav with the close button
+function w3_close() {
+    mySidenav.style.display = "none";
+    overlayBg.style.display = "none";
+}
+</script>
+ </body>
+</html>
+

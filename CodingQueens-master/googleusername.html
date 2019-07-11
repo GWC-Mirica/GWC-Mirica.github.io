@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <!--Load the APIs-->
+        <script type="text/javascript" src="http://www.google.com/jsapi"></script>
+        <script type="text/javascript"> 
+            google.load('visualization', '1',
+                {'packages':['corechart', 'table']}
+                ); 
+        </script>
+        <script type="text/javascript">
+            function authenticate(){
+                //fetch data from input
+                var user_atmpt = document.getElementById("usr").value;
+                var pass_atmpt = document.getElementById("pss").value;
+            
+                function runQuery() {
+                    var query = new google.visualization.Query('https://docs.google.com/spreadsheets/d/1fO4kpptrhRl0uU8IhKfYgzX4Y8PZvTN_6DVdFJTqSTU/edit?usp=sharing');
+                    query.setQuery('select A,B,C,D,E,F where A matches ' + '"' + user_atmpt + '"');
+                    var data_string =  query.send(handleQueryResponse);
+                };
+                // A callback function that runs when data source responds
+                // Take an object of type QueryResponse
+                function handleQueryResponse(response){
+                    if (response.isError()) {
+                        window.alert("Error accessing the database.")
+                    }
+                    else {                   
+                        data = response.getDataTable().toJSON();
+                        var header = document.getElementById("error_message");
+                        var userinfo = document.getElementById("user_info");
+                        var obj = JSON.parse(data);
+                        if (obj.rows.length ==0) { //because google api does not seem to throwing errors as expected :/
+                            header.innerHTML = "User does not exist";
+                        }
+                        else {
+                            var user = obj.rows[0].c[0].v;
+                            var password = obj.rows[0].c[1].v;
+                
+                            if (user.match(user_atmpt) && password.match(pass_atmpt)) {
+                                header.innerHTML = 'User authenticated!';
+                        		userinfo.innerHTML = "Name: " + obj.rows[0].c[2].v + " " + obj.rows[0].c[3].v + 
+                        							 "<br />Phone: " + obj.rows[0].c[4].v + 
+                        							 "<br />Email: " + obj.rows[0].c[5].v;
+                       		}
+                            else {
+                               header.innerHTML = "Username/Password is incorrect. Please try again.";
+                            }; 
+                        };
+                    };
+                }
+                runQuery();
+   
+            }
+            
+        </script>
+    </head>
+    <body>
+    <h4>LOGIN</h4>
+    <div id="error_message" style="color: red; font-style: bold; float: left;"></div><br />
+    <table>
+		<tr>
+			<td>Username:</td>
+			<td><input type="text" id="usr"></td>
+		</tr>	
+		<tr>
+			<td>Password:</td>
+			<td><input type="password" id="pss"></td>
+		</tr>
+	</table>
+    <button onclick="authenticate()">Login</button>
+    <br/>
+	<div id="user_info" style="font-style: bold;"></div>
+    </body>
+</html>

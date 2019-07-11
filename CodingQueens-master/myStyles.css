@@ -1,0 +1,58 @@
+@font-face {
+    font-family: myFirstFont;
+    src: url(beyond_the_mountains.woff);
+}
+
+div {
+    font-family: myFirstFont;
+}
+@font-face {
+    font-family: myFirstFont2;
+    src: url(ArtBrush.woff);
+}
+
+div {
+    font-family: myFirstFont2;
+}
+h1{
+	color: white;
+	text-align: center;
+	font-family: "Beyond The Mountains";
+	font-size: 50px;
+    border: 10px solid transparent;
+    padding: 10px;
+    -webkit-border-image: url(roses.jpg) 20 round; /* Safari 3.1-5 */
+    -o-border-image: url(roses.jpg) 20 round; /* Opera 11-12.1 */
+    border-image: url(roses.jpg) 20 round;
+}
+body{
+	color: white;
+	text-align: left;
+	font-family: "ArtBrush";
+	font-size: 25px;
+	word-spacing: 15px
+	}
+body {
+    background-image: url("rosefall.gif");
+}
+p{
+	border: 10px solid transparent;
+    padding: 10px;
+    -webkit-border-image: url(roses.jpg) 20 round; /* Safari 3.1-5 */
+    -o-border-image: url(roses.jpg) 20 round; /* Opera 11-12.1 */
+    border-image: url(roses.jpg) 20 round;}
+}
+li{
+	border: 10px solid transparent;
+    padding: 10px;
+    -webkit-border-image: url(roses.jpg) 20 round; /* Safari 3.1-5 */
+    -o-border-image: url(roses.jpg) 20 round; /* Opera 11-12.1 */
+    border-image: url(roses.jpg) 20 round;
+}
+#borderimg2 {
+    border: 10px solid transparent;
+    padding: 15px;
+    -webkit-border-image: url(border.png) 30 stretch; /* Safari 3.1-5 */
+    -o-border-image: url(border.png) 30 stretch; /* Opera 11-12.1 */
+    border-image: url(border.png) 30 stretch;
+}

@@ -1,0 +1,42 @@
+@font-face {
+    font-family: myFirstFont;
+    src: url(beyond_the_mountains.woff);
+}
+
+div {
+    font-family: "Courier New";
+}
+@font-face {
+    font-family: "Courier New";
+    src: url(ArtBrush.woff);
+}
+
+div {
+    font-family: "Courier New";
+}
+h1{
+	color: white;
+	text-align: center;
+	font-family: "Courier New";
+	font-size: 50px;
+}
+body{
+	color: white;
+	text-align: left;
+	font-family: "Courier New";
+	font-size: 25px;
+	word-spacing: 15px
+	}
+body {
+    background-color: lightgreen;
+}
+p {
+    text-indent: 50px;
+}
+h5{
+	color: white;
+	text-align: center;
+	font-family: "Courier New";
+	font-size: 25px;
+	word-spacing: 15px
+}

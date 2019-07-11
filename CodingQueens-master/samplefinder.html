@@ -1,0 +1,455 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+<title>College Finder</title>
+ <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="http://www.w3schools.com/lib/w3.css">
+<link rel="stylesheet" href="http://www.w3schools.com/lib/w3-theme-black.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto">
+<link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.min.css">
+  <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+ <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<style>
+.newspaper {
+    -webkit-column-count: 4; /* Chrome, Safari, Opera */
+    -moz-column-count: 4; /* Firefox */
+    column-count: 4;
+}
+
+html,body,h2,h3,h4,h5,h6 {font-family: "Code Bold";}
+.w3-sidenav a,.w3-sidenav h4{padding:12px;}
+.w3-navbar a{padding-top:12px !important;padding-bottom:12px !important;}
+.w3-container{
+      padding: 10px 10px;
+  }
+</style>
+<style>
+ @font-face {
+    font-family: myFirstFont;
+    src: url(code-bold.woff);
+	}
+	div {
+    font-family: myFirstFont;
+	}
+  .container-fluid {
+      padding: 0px 0px;
+  }
+  h1{
+   font-family: "Code Bold";
+  }
+   .jumbotron {
+      background-color: #000000;
+      color: #44F72D;
+      padding: 10px 5px;
+      font-family: Montserrat, sans-serif;
+  }
+  li{
+   font-family: "Code Bold";
+  }
+  .navbar {
+      margin-bottom: 0;
+      background-color: #000000;
+      z-index: 9999;
+      border: 0;
+	  height:50px;
+      font-size: 12px !important;
+      line-height: 1.42857143 !important;
+      letter-spacing: 4px;
+      border-radius: 0;
+     
+  }
+  .navbar li a, .navbar .navbar-brand {
+      color: #fff !important;
+  }
+  .navbar-nav li a:hover, .navbar-nav li.active a {
+      color: #fff !important;
+      background-color: #2f2f2f !important;
+  }
+  .navbar-default .navbar-toggle {
+      border-color: transparent;
+      color: #2f2f2f !important;
+  }
+   footer .glyphicon {
+      font-size: 20px;
+      margin-bottom: 2px;
+      color: #000000;
+  }
+  </style>
+  <script type="text/javascript" src="http://www.google.com/jsapi"></script>
+
+		<script type="text/javascript"> 
+            google.load('visualization', '1',
+                {'packages':['corechart', 'table']}
+                ); 
+        </script>
+        <script type="text/javascript">
+            function findmycollege(){
+			
+			
+                        var header = document.getElementById("error_message");
+                        var collegeinfo = document.getElementById("collegeinfo");
+						
+						header.innerHTML = "";
+						collegeinfo.innerHTML = "";
+                //fetch data from input
+                var size = "Large";
+				
+				var state = "Illinois";
+				
+				var major_minor = "Computer Sciences";
+				
+				var environment = "Urban";
+				
+				var sport = "Women's Soccer";
+				
+				if(document.getElementById("urban").checked == true)
+					environment = "Urban";
+				else 
+					if (document.getElementById("rural").checked == true)
+						environment = "Rural";
+				
+				if (document.getElementById("small").checked == true)
+					size = "Small";
+				else
+					if (document.getElementById("medium").checked == true)
+						size = "Medium";
+				else
+					if (document.getElementById("large").checked == true)
+						size = "Large";
+				
+				
+				if(document.getElementById("womens-soccer").checked == true)
+					sport = "Women's Soccer";
+					
+				if(document.getElementById("computer-sciences").checked == true)
+					major_minor = "Computer Sciences";
+				
+				
+				if (document.getElementById("illinois").checked == true)
+						state = "Illinois";        
+				else
+					if (document.getElementById("california").checked == true)
+						state = "California";        
+				
+                function runQuery() {
+                    var query = new google.visualization.Query('https://docs.google.com/spreadsheets/d/16gslxlvgashLqKeRyrJaowasgv3CIAbSgLK5Q1TSHVQ/edit?usp=sharing');
+                    query.setQuery('select A,B,C,D,E,F,G,H,I, J where B matches ' + '"' + size + '"' +  ' AND E matches "' + state + '"' +  ' AND D contains "' + major_minor + '"' +  ' AND F contains "' + environment + '"');
+                    var data_string =  query.send(handleQueryResponse);
+                };
+                // A callback function that runs when data source responds
+                // Take an object of type QueryResponse
+                function handleQueryResponse(response){
+                    if (response.isError()) {
+                        window.alert("Error accessing the database.")
+                    }
+                    else {                   
+                        data = response.getDataTable().toJSON();
+                        var obj = JSON.parse(data);
+                        if (obj.rows.length ==0) { //because google api does not seem to throwing errors as expected :/
+                            header.innerHTML = "No matches found.";
+                        }
+                        else {
+								var table = document.createElement('table');
+								table.setAttribute('border','1');
+								table.setAttribute('width','100%')
+								for(var i=0; i<obj.rows.length; i++)
+								{
+									var row = table.insertRow(i);
+									var a = document.createElement('a');
+									var text = document.createTextNode(obj.rows[i].c[0].v);
+									var cell = row.insertCell(0);
+											
+									a.appendChild(text);
+									a.href = obj.rows[i].c[9].v;
+									cell.setAttribute('align','center')
+									cell.appendChild(a);
+								
+								}
+								document.getElementById("collegeinfo").appendChild(table);
+
+								//collegeinfo.innerHTML += "</table>";
+                       	};
+                    };
+                }
+                runQuery();
+   
+            }            
+        </script>
+</head>
+<body>
+<nav class="navbar navbar-default">
+<!-- Collect the nav links, forms, and other content for toggling -->
+    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+      <ul class="nav navbar-nav">
+	  <a class="navbar-brand" href="firsthomepage.html">INTER</a>
+        <li><a href="dashboard.html">Dashboard</a></li>
+    <li><a href="toolspage_orig.html">My Tools</a></li>
+        </li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+       <li><a href="aboutuspage.html"><span class="glyphicon glyphicon-user"></span> About us</a></li>
+          </ul>
+        </li>
+      </ul>
+    </div><!-- /.navbar-collapse -->
+  </div><!-- /.container-fluid -->
+</nav>
+<div class="jumbotron text-center w3-grey">
+  <h1 style="font-size:100px">INTER</h1>
+  <img src="logo.jpeg" class="img-circle" style="width: 600px; height: 375px" alt="Logo">
+  <p></p>
+  <p>Get INTER-connected with your future</p>
+</div>
+<!-- Overlay effect when opening sidenav on small screens -->
+<div class="w3-overlay w3-hide-large" onclick="w3_close()" style="cursor:pointer" title="close side menu" id="myOverlay"></div>
+
+<!-- Main content: shift it to the right by 250 pixels when the sidenav is visible -->
+<div class="w3-main" style="margin-left:250px">
+  <div class="w3-row w3-padding-64 text-center">
+    <div class="w3-twothird w3-container">
+	<h1> COLLEGE FINDER </h1>
+      <h2 class="w3-text-teal">School Size:</h2>
+	  <h3> Check one below. </h3>
+      <form action="demo_form.asp">
+			<input type="checkbox" name="Small" value="Small" id="small" > Small (5,000 people or less)<br>
+			<input type="checkbox" name="Medium" value="Medium" id="medium"> Medium (5,000-15,000 people)<br>
+			<input type="checkbox" name="Large" value="Large" id="large" > Large (15,000 + people)<br>
+			</form>
+    </div>
+    
+
+  <div class="w3-row">
+
+    <div class="w3-twothird w3-container">
+  	<h2 class="w3-text-teal text-center">Sports:</h2>	
+      <h3 style="text-align:center"> Check all that apply. </h3>
+		<div class= "newspaper ">
+			<form action="demo.form.asp"><ul class="list-group">
+  <li class="list-group-item .col-md-4"><input type="checkbox" name="Sport" value="" > Men's Cross-Country<br></li>
+			  <li class="list-group-item"><input type="checkbox" name="Sport" value="" > Women's Cross-Country<br></li>
+			  <li class="list-group-item"><input type="checkbox" name="Sport" value="" > Field Hockey<br></li>
+			  <li class="list-group-item"><input type="checkbox" name="Sport" value="" > Football<br></li>
+			  <li class="list-group-item"><input type="checkbox" name="Sport" value="" > Men's Soccer<br></li>
+			  <li class="list-group-item"><input type="checkbox" name="Sport" value="" id="womens-soccer" > Women's Soccer<br></li>
+			  <li class="list-group-item"><input type="checkbox" name="Sport" value="" > Men's Water Polo<br></li>
+			  <li class="list-group-item"><input type="checkbox" name="Sport" value="" > Women's Water Polo<br></li>
+			  <li class="list-group-item"><input type="checkbox" name="Sport" value="" > Men's Volleyball<br></li>
+			  <li class="list-group-item"><input type="checkbox" name="Sport" value="" > Women's Volleyball<br></li>
+			  <li class="list-group-item"><input type="checkbox" name="Sport" value="" > Men's Basketball<br></li>
+			  <li class="list-group-item"><input type="checkbox" name="Sport" value="" > Women's Basketball <br></li>
+			  <li class="list-group-item"><input type="checkbox" name="Sport" value="" > Men's Bowling<br></li>
+			  <li class="list-group-item"><input type="checkbox" name="Sport" value="" > Women's Bowling <br></li>
+			  <li class="list-group-item"><input type="checkbox" name="Sport" value="" > Men's Fencing <br>			</li>
+			  <li class="list-group-item"><input type="checkbox" name="Sport" value="" > Women's Fencing  <br></li>
+			  <li class="list-group-item"><input type="checkbox" name="Sport" value="" > Men's Ice Hockey  <br></li>
+			  <li class="list-group-item"><input type="checkbox" name="Sport" value="" > Women's Ice Hockey <br></li>
+			  <li class="list-group-item"><input type="checkbox" name="Sport" value="" > Men's Gymnastics<br></li>
+			  <li class="list-group-item"><input type="checkbox" name="Sport" value="" > Women's Gymnastics <br></li>
+			  <li class="list-group-item"><input type="checkbox" name="Sport" value="" > Men's Mixed Rifle<br></li>
+			  <li class="list-group-item"><input type="checkbox" name="Sport" value="" > Women's Mixed Rifle<br></li>
+			  <li class="list-group-item"><input type="checkbox" name="Sport" value="" > Men's Mixed Skiing<br></li>
+			  <li class="list-group-item"><input type="checkbox" name="Sport" value="" > Women's Mixed Skiing <br></li>
+			  <li class="list-group-item"><input type="checkbox" name="Sport" value="" > Men's Swimming and Diving<br></li>
+			  <li class="list-group-item"><input type="checkbox" name="Sport" value="" > Women's Swimming and Diving <br></li>
+			  <li class="list-group-item"><input type="checkbox" name="Sport" value="" > Men's Indoor Track and Field <br></li>
+			  <li class="list-group-item"><input type="checkbox" name="Sport" value="" > Women's Indoor Track and Field  <br></li>
+			  <li class="list-group-item"><input type="checkbox" name="Sport" value="" > Wrestling  <br></li>
+			  <li class="list-group-item"><input type="checkbox" name="Sport" value="" > Baseball <br></li>
+			  <li class="list-group-item"><input type="checkbox" name="Sport" value="" > Softball <br></li>
+			  <li class="list-group-item"><input type="checkbox" name="Sport" value="" > Men's Golf <br></li>
+			  <li class="list-group-item"><input type="checkbox" name="Sport" value="" > Women's Golf <br></li>
+			  <li class="list-group-item"><input type="checkbox" name="Sport" value="" > Men's Lacrosse  <br></li>
+			  <li class="list-group-item"><input type="checkbox" name="Sport" value="" > Women's Lacrosse  <br></li>
+			  <li class="list-group-item"><input type="checkbox" name="Sport" value="" > Men's Outdoor Track and Field <br></li>
+			  <li class="list-group-item"><input type="checkbox" name="Sport" value="" > Women's Outdoor Track and Field <br></li>
+			  <li class="list-group-item"><input type="checkbox" name="Sport" value="" > Rowing <br></li>
+			  <li class="list-group-item"><input type="checkbox" name="Sport" value="" > Men's Tennis  <br></li>
+			  <li class="list-group-item"><input type="checkbox" name="Sport" value="" > Women's Tennis  <br></li>
+			  <li class="list-group-item"><input type="checkbox" name="Sport" value="" > Boxing  <br></li>
+			  <li class="list-group-item"><input type="checkbox" name="Sport" value="" > Beach Volleyball <br></li>
+    </div>
+    <br></br>
+  </div>
+
+  <div class="w3-row w3-padding-64">
+    <div class="w3-twothird w3-container">
+	 	<h2 class="w3-text-teal text-center">Majors/Minors</h2>	
+      <h3 style="text-align:center"> Check all that apply. </h3>
+		<div class= "newspaper">
+			<li class="list-group-item"><input type="checkbox" name="Major" value="" > Agriculture  <br></li>
+			<li class="list-group-item"><input type="checkbox" name="Major" value="" > Ethnic Studies <br></li>
+			<li class="list-group-item"><input type="checkbox" name="Major" value="" > Biology <br></li>
+			<li class="list-group-item"><input type="checkbox" name="Major" value="" > Biochemistry and Biophysics <br></li>
+			<li class="list-group-item"><input type="checkbox" name="Major" value="" > Botany <br></li>
+			<li class="list-group-item"><input type="checkbox" name="Major" value="" > Zoology  <br></li>
+			<li class="list-group-item"><input type="checkbox" name="Major" value="" > Marine Biology  <br></li>
+			<li class="list-group-item"><input type="checkbox" name="Major" value="" > Physical Sciences  <br></li>
+			<li class="list-group-item"><input type="checkbox" name="Major" value="" > Astronomy <br></li>
+			<li class="list-group-item"><input type="checkbox" name="Major" value="" > Astrophysics<br></li>
+			<li class="list-group-item"><input type="checkbox" name="Major" value="" > Chemistry<br></li>
+			<li class="list-group-item"><input type="checkbox" name="Major" value="" > Geological Sciences<br></li>
+			<li class="list-group-item"><input type="checkbox" name="Major" value="" > Physics<br></li>
+			<li class="list-group-item"><input type="checkbox" name="Major" value="" > Earth and Space Sciences<br></li>
+			<li class="list-group-item"><input type="checkbox" name="Major" value="" > Science Technologies<br></li>
+			<li class="list-group-item"><input type="checkbox" name="Major" value="" id= "computer-sciences" > Computer Sciences <br></li>
+			<li class="list-group-item"><input type="checkbox" name="Major" value="" > Visual and Performing Arts <br></li>
+			<li class="list-group-item"><input type="checkbox" name="Major" value="" > Dance  <br></li>
+			<li class="list-group-item"><input type="checkbox" name="Major" value="" > Design/Photography <br></li>
+			<li class="list-group-item"><input type="checkbox" name="Major" value="" > Fashion Design <br></li>
+			<li class="list-group-item"><input type="checkbox" name="Major" value="" > Film Arts<br></li>
+			<li class="list-group-item"><input type="checkbox" name="Major" value="" > Fine Arts <br></li>
+			<li class="list-group-item"><input type="checkbox" name="Major" value="" > Mathematics<br></li>
+			<li class="list-group-item"><input type="checkbox" name="Major" value="" > Statistics<br></li>
+			<li class="list-group-item"><input type="checkbox" name="Major" value="" > Education<br></li>
+			<li class="list-group-item"><input type="checkbox" name="Major" value="" > Engineering<br></li>
+			<li class="list-group-item"><input type="checkbox" name="Major" value="" > Drafting <br></li>
+			<li class="list-group-item"><input type="checkbox" name="Major" value="" > Automotive Engineering and Tech. <br></li>
+			<li class="list-group-item"><input type="checkbox" name="Major" value="" > Aviation and Air Transportation  <br></li>
+			<li class="list-group-item"><input type="checkbox" name="Major" value="" > Construction and Building Tech. <br></li>
+			<li class="list-group-item"><input type="checkbox" name="Major" value="" > Transportation/Logistics <br></li>
+			<li class="list-group-item"><input type="checkbox" name="Major" value="" > English and Literature <br></li>
+			<li class="list-group-item"><input type="checkbox" name="Major" value="" > General and Interdisciplinary Studies <br></li>
+			<li class="list-group-item"><input type="checkbox" name="Major" value="" > Military Science and Protective Services<br></li>
+			<li class="list-group-item"><input type="checkbox" name="Major" value="" > Public Affairs and Law <br></li>
+			<li class="list-group-item"><input type="checkbox" name="Major" value="" > Foreign Languages  <br></li>
+			<li class="list-group-item"><input type="checkbox" name="Major" value="" > Parks and Recreation Resources <br></li>
+			<li class="list-group-item"><input type="checkbox" name="Major" value="" > Philosophy, Religion, and Theology <br></li>
+			<li class="list-group-item"><input type="checkbox" name="Major" value="" > Social Sciences<br></li>
+			<li class="list-group-item"><input type="checkbox" name="Major" value="" > Anthropology and Archaeology  <br></li>
+			<li class="list-group-item"><input type="checkbox" name="Major" value="" > Criminology  <br></li>
+			<li class="list-group-item"><input type="checkbox" name="Major" value="" > Economics  <br></li>
+			<li class="list-group-item"><input type="checkbox" name="Major" value="" > Geography<br>			</li>
+			<li class="list-group-item"><input type="checkbox" name="Major" value="" > History<br></li>
+			<li class="list-group-item"><input type="checkbox" name="Major" value="" > International Affairs/Relations<br></li>
+			<li class="list-group-item"><input type="checkbox" name="Major" value="" > Political Science and Government <br></li>
+			<li class="list-group-item"><input type="checkbox" name="Major" value="" > Psychology  <br></li>
+			<li class="list-group-item"><input type="checkbox" name="Major" value="" > Sociology <br></li>
+			<li class="list-group-item"><input type="checkbox" name="Major" value="" > Urban Studies <br></li>
+			<li class="list-group-item"><input type="checkbox" name="Major" value="" > Medical and Allied Health Care<br></li>
+			<h3> Don't see your specific major or minor? Pick the topic to which your major or minor applies to, and we will make sure 
+				we find the right colleges for you! </h3>
+    </div>
+    
+  </div>
+  
+
+  <div class="w3-row w3-padding-64">
+    <div class="w3-twothird w3-container">
+	      <h2 class="w3-text-teal text-center">State:</h2>
+	  <h3 class="w3-text-teal text-center"> Select One Option:</h3>
+		<div class= "newspaper">
+
+			<li class="list-group-item"><input type="checkbox" name="State" value="" > Alabama  <br></li>
+			<li class="list-group-item"><input type="checkbox" name="State" value="" > Alaska <br></li>
+			<li class="list-group-item"><input type="checkbox" name="State" value="" > Arizona <br></li>
+			<li class="list-group-item"><input type="checkbox" name="State" value="" > Arkansas   <br></li>
+			<li class="list-group-item"><input type="checkbox" name="State" value="" id="california" > California <br></li>
+			<li class="list-group-item"><input type="checkbox" name="State" value="" > Colorado  <br></li>
+			<li class="list-group-item"><input type="checkbox" name="State" value="" > Connecticut   <br></li>
+			<li class="list-group-item"><input type="checkbox" name="State" value="" > Delaware   <br></li>
+			<li class="list-group-item"><input type="checkbox" name="State" value="" > Florida <br></li>
+			<li class="list-group-item"><input type="checkbox" name="State" value="" > Georgia<br></li>
+			<li class="list-group-item"><input type="checkbox" name="State" value="" > Hawaii<br></li>
+			<li class="list-group-item"><input type="checkbox" name="State" value="" > Idaho <br></li>
+			<li class="list-group-item"><input type="checkbox" name="State" value="" id="illinois" > Illinois<br></li>
+			<li class="list-group-item"><input type="checkbox" name="State" value="" > Indiana <br></li>
+			<li class="list-group-item"><input type="checkbox" name="State" value="" > Iowa  <br></li>
+			<li class="list-group-item"><input type="checkbox" name="State" value="" > Kentucky  <br></li>
+			<li class="list-group-item"><input type="checkbox" name="State" value="" > Louisiana<br></li>
+			<li class="list-group-item"><input type="checkbox" name="State" value="" > Maine  <br></li>
+			<li class="list-group-item"><input type="checkbox" name="State" value="" > Maryland <br></li>
+			<li class="list-group-item"><input type="checkbox" name="State" value="" > Massachusetts  <br></li>
+			<li class="list-group-item"><input type="checkbox" name="State" value="" > Michigan <br></li>
+			<li class="list-group-item"><input type="checkbox" name="State" value="" > Minnesota<br></li>
+			<li class="list-group-item"><input type="checkbox" name="State" value="" > Mississippi <br></li>
+			<li class="list-group-item"><input type="checkbox" name="State" value="" > Missouri<br></li>
+			<li class="list-group-item"><input type="checkbox" name="State" value="" > Montana <br></li>
+			<li class="list-group-item"><input type="checkbox" name="State" value="" > Nebraska     <br></li>
+			<li class="list-group-item"><input type="checkbox" name="State" value="" > Nevada    <br></li>
+			<li class="list-group-item"><input type="checkbox" name="State" value="" > New Hampshire <br></li>
+			<li class="list-group-item"><input type="checkbox" name="State" value="" > New Jersey    <br></li>
+			<li class="list-group-item"><input type="checkbox" name="State" value="" > New Mexico    <br></li>
+			<li class="list-group-item"><input type="checkbox" name="State" value="" > New York    <br></li>
+			<li class="list-group-item"><input type="checkbox" name="State" value="" > North Carolina   <br></li>
+			<li class="list-group-item"><input type="checkbox" name="State" value="" > North Dakota    <br></li>
+			<li class="list-group-item"><input type="checkbox" name="State" value="" > Ohio    <br></li>
+			<li class="list-group-item"><input type="checkbox" name="State" value="" > Oklahoma <br></li>
+			<li class="list-group-item"><input type="checkbox" name="State" value="" > Oregon   <br></li>
+			<li class="list-group-item"><input type="checkbox" name="State" value="" > Pennsylvania  <br></li>
+			<li class="list-group-item"><input type="checkbox" name="State" value="" > Rhode Island  <br></li>
+			<li class="list-group-item"><input type="checkbox" name="State" value="" > South Carolina<br>	</li>		
+			<li class="list-group-item"><input type="checkbox" name="State" value="" > South Dakota<br></li>
+			<li class="list-group-item"><input type="checkbox" name="State" value="" > Tennessee <br></li>
+			<li class="list-group-item"><input type="checkbox" name="State" value="" > Texas    <br></li>
+			<li class="list-group-item"><input type="checkbox" name="State" value="" > Utah  <br></li>
+			<li class="list-group-item"><input type="checkbox" name="State" value="" > Vermont <br></li>
+			<li class="list-group-item"><input type="checkbox" name="State" value="" > Virginia <br></li>
+			<li class="list-group-item"><input type="checkbox" name="State" value="" > Washington  <br></li>
+			<li class="list-group-item"><input type="checkbox" name="State" value="" > West Virginia <br></li>
+			<li class="list-group-item"><input type="checkbox" name="State" value="" > Wisconson <br></li>
+			<li class="list-group-item"><input type="checkbox" name="State" value="" > Wyoming <br></li>
+		</div>
+		
+	<div class="w3-row w3-padding-64">
+    <div class="w3-twothird w3-container">
+      <h2 class="w3-text-teal text-center">Environment:</h2>
+			<li class="list-group-item"><input type="checkbox" name="Environment" value="" id= "urban"> Urban  <br></li>
+			<li class="list-group-item"><input type="checkbox" name="Environment" value="" id= "rural" > Rural <br></li>
+			<h3> <h3> *If no preference, select all. </h3>
+	</div>
+	
+	<div class="w3-row w3-padding-64">
+    <div class="w3-twothird w3-container">
+      <h2 class="w3-text-teal text-center">Division Preference:</h2>
+			<li class="list-group-item"><input type="checkbox" name="Division" value="" > Division 1  <br></li>
+			<li class="list-group-item"><input type="checkbox" name="Division" value="" > Division 2 <br></li>
+			<li class="list-group-item"><input type="checkbox" name="Division" value="" > Division 3 <br></li>
+			<h3> *If no preference, select all that apply. </h3>
+		</div>
+		
+	<div class="w3-row w3-padding-64">
+    <div class="w3-twothird w3-container">
+      <h2 class="w3-text-teal text-center">Tuition Costs:</h2>
+	  <h3 class="w3-text-teal text-center"> (Scholarships, room, board, and other fees do not apply):</h3>
+			<li class="list-group-item"><input type="checkbox" name="Tuition" value="" > Level 1($3,000 or less) <br></li>
+			<li class="list-group-item"><input type="checkbox" name="Tuition" value="" > Level 2($3,000 - $5,000)  <br></li>
+			<li class="list-group-item"><input type="checkbox" name="Tuition" value="" > Level 3($5,000 - $10,000)  <br></li>
+			<li class="list-group-item"><input type="checkbox" name="Tuition" value="" > Level 4($10,000  - $20,000)  <br></li>
+			<li class="list-group-item"><input type="checkbox" name="Tuition" value="" > Level 5($20,000 - $30,000) <br></li>
+			<li class="list-group-item"><input type="checkbox" name="Tuition" value="" > Level 6($30,000 +)  <br></li>
+			<h3> *If no preference, select all that apply </h3>
+		</div>
+		
+	<div class="w3-row w3-padding-64">
+    <div class="w3-twothird w3-container">
+      <h2 class="w3-text-teal text-center">Religious Affiliation:</h2>
+			<li class="list-group-item"><input type="checkbox" name="Religious Affiliation" value="" > Catholic <br></li>
+			<li class="list-group-item"><input type="checkbox" name="Religious Affiliation" value="" > Mormon <br></li>
+			<li class="list-group-item"><input type="checkbox" name="Religious Affiliation" value="" > Baptist  <br></li>
+			<li class="list-group-item"><input type="checkbox" name="Religious Affiliation" value="" > Lutheran <br></li>
+			<h3> *If no preference, leave blank </h3>
+	
+<span>	<button type="button" onClick="findmycollege()" class="btn btn-success text-center" style="height:75px; width:450px; font-size:30px">
+ Find a College Now <i class="glyphicon glyphicon-arrow-right"></i> 
+</button>
+<br></br>
+  <!-- Pagination -->
+    <div id="error_message" style="color: red; font-style: bold; float: left;"></div><br />
+
+	<div id="collegeinfo"></div>
+<button type="button" onClick="location.href='index.html'" class="btn btn-primary text-center" style="height:75px; width:450px; font-size:30px">
+ Favorite?<i class="glyphicon glyphicon-star"></i> 
+</button>
+
+
+<!-- END MAIN -->
+</div>
+  <!-- Custom Theme JavaScript -->
+  <script src='google-sheet.js'></script>
+  
+</body>
+</html>
+

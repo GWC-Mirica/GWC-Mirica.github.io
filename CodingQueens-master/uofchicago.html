@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>INTER</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <link href="http://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet" type="text/css">
+  <link href="http://fonts.googleapis.com/css?family=Lato" rel="stylesheet" type="text/css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+  <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  <link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.min.css">
+	<style>
+	@font-face {
+    font-family: myFirstFont2;
+    src: url(basic_title_font.woff);
+	}
+	div {
+    font-family: myFirstFont2;
+	}  
+	body {
+      font-family: "Basic Title Font";
+	  font-size:20px;
+      line-height: 2.8;
+      color: #000000;
+  }
+  
+  br{background-color:#000066;}
+  h2 {
+	 font-family: "Basic Title Font";
+      font-size: 45px;
+      text-transform: uppercase;
+      color: #000000;
+      font-weight: 600;
+      margin-bottom: 30px;
+  }
+  h4 {
+      font-size: 19px;
+      line-height: 1.375em;
+      color: #303030;
+      font-weight: 400;
+      margin-bottom: 30px;
+  }
+  .jumbotron {
+      background-color: #000000;
+      color: #44F72D;
+      padding: 75px 15px;
+      font-family: Montserrat, sans-serif;
+  }
+  @font-face {
+    font-family: myFirstFont;
+    src: url(code-bold.woff);
+	}
+
+	div {
+    font-family: myFirstFont;
+	}
+  .jumbotron2 {
+      background-color: #2f2f2f;
+      color: #000000;
+      padding: 75px 50px;
+      font-family: "Code Bold";
+  }
+  .container-fluid {
+      padding: 60px 50px;
+  }
+  .container-fluid_2{
+	  paddng: 5px 50px;
+  }
+  .bg-grey {
+      background-color: #2f2f2f;
+  }
+  .logo-small {
+      color: #000000;
+      font-size: 50px;
+  }
+  .logo {
+      color: #000000;
+      font-size: 200px;
+  }
+  .thumbnail {
+      padding: 0 0 15px 0;
+      border: none;
+      border-radius: 0;
+  }
+  .thumbnail img {
+      width: 100%;
+      height: 100%;
+      margin-bottom: 10px;
+  }
+  .panel {
+      border: 1px solid #000000;
+      border-radius:0 !important;
+      transition: box-shadow 0.5s;
+  }
+  .panel:hover {
+      box-shadow: 5px 0px 40px rgba(0,0,0, .2);
+  }
+  .panel-footer .btn:hover {
+      border: 1px solid #000000;
+      background-color: #000000 !important;
+      color: #000000;
+  }
+  .panel-heading {
+      color: #fff !important;
+      background-color: #000000 !important;
+      padding: 25px;
+      border-bottom: 1px solid transparent;
+      border-top-left-radius: 0px;
+      border-top-right-radius: 0px;
+      border-bottom-left-radius: 0px;
+      border-bottom-right-radius: 0px;
+  }
+  .panel-footer {
+      background-color: white !important;
+  }
+  .panel-footer h3 {
+      font-size: 32px;
+  }
+  .panel-footer h4 {
+      color: #aaa;
+      font-size: 14px;
+  }
+  .panel-footer .btn {
+      margin: 15px 0;
+      background-color: #000000;
+      color: #000000;
+  }
+  .navbar {
+      margin-bottom: 0;
+      background-color: #2f2f2f;
+      z-index: 9999;
+      border: 0;
+      font-size: 12px !important;
+      line-height: 1.42857143 !important;
+      letter-spacing: 4px;
+      border-radius: 0;
+      font-family: Montserrat, sans-serif;
+  }
+  .navbar li a, .navbar .navbar-brand {
+      color: #fff !important;
+  }
+  .navbar-nav li a:hover, .navbar-nav li.active a {
+      color: #fff !important;
+      background-color: #2f2f2f !important;
+  }
+  .navbar-default .navbar-toggle {
+      border-color: transparent;
+      color: #2f2f2f !important;
+  }
+  footer .glyphicon {
+      font-size: 20px;
+      margin-bottom: 2px;
+      color: #000000;
+  }
+  .slideanim {visibility:hidden;}
+  .slide {
+      animation-name: slide;
+      -webkit-animation-name: slide;
+      animation-duration: 1s;
+      -webkit-animation-duration: 1s;
+      visibility: visible;
+  }
+  @keyframes slide {
+    0% {
+      opacity: 0;
+      -webkit-transform: translateY(70%);
+    }
+    100% {
+      opacity: 1;
+      -webkit-transform: translateY(0%);
+    }
+  }
+  @-webkit-keyframes slide {
+    0% {
+      opacity: 0;
+      -webkit-transform: translateY(70%);
+    }
+    100% {
+      opacity: 1;
+      -webkit-transform: translateY(0%);
+    }
+  }
+  @media screen and (max-width: 1000px max-height:700) {
+    .col-sm-4 {
+      text-align: center;
+      margin: 25px 0;
+    }
+  }
+  @media screen and (max-width: 480px) {
+    .logo {
+        font-size: 150px;
+    }
+  }
+  </style>
+	</head>
+		<body id="myPage" data-spy="scroll" data-target=".navbar" data-offset="60">
+
+<nav class="navbar navbar-default navbar-fixed-top navbar-nav navbar-center">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="#myPage">INTER</a>
+    </div>
+    <div class="collapse navbar-collapse" id="myNavbar">
+	   <ul class="nav navbar-nav navbar-center-right">
+        <li><a href="user.html">Home</a></li>
+		</ul>
+      <ul class="nav navbar-nav navbar-center-right">
+        <li><a href="samplefinder.html">College Finder</a></li>
+		</ul>
+	  <ul class="nav navbar-nav navbar-center-right">
+        <li><a href="toolspage_orig.html">My tools</a></li>
+      </ul>
+	  <ul class="nav navbar-nav navbar-right">
+      <li><a href="aboutuspage.html"><span class="glyphicon glyphicon-user"></span> About us</a></li>
+    </ul>
+    </div>
+  </div>
+</nav>
+
+<div class="jumbotron text-center w3-grey">
+  <h1 style="font-size:100px">University of Chicago</h1>
+</div>
+		<div id="about" class="container-fluid text-center">
+  <div class="row">
+		<h4> Website: <a href= "http://www.uchicago.edu/">http://www.uchicago.edu/</a> </h4>
+			
+			<h4> Email Address: collegeadmissions@uchicago.edu  </h4>
+			
+			<h4> Phone Number:  773-702-8650</h4>	
+    </div>
+
+    </div>
+</div>	
+		</body>
+</html>
